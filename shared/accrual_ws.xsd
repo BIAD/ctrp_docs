@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="gov.nih.nci.accrual.webservices.types"
+	xmlns:tns="gov.nih.nci.accrual.webservices.types" elementFormDefault="qualified"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd	                   
+                        http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+
+	<annotation>
+		<appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:package name="gov.nih.nci.accrual.webservices.types" />
+			</jaxb:schemaBindings>
+		</appinfo>
+	</annotation>
+
+	<element name="studySubjects">
+		<annotation>
+			<documentation>List of study subjects (patients).
+			</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="studySubject" type="tns:StudySubject"
+					minOccurs="0" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	
+   
+	
+
+	<simpleType name="Gender">
+		<annotation>
+			<documentation>List of gender codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Male" />
+			<enumeration value="Female" />
+			<enumeration value="Unspecified" />
+			<enumeration value="Unknown" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="Race">
+		<annotation>
+			<documentation>List of race codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="American Indian or Alaska Native" />
+			<enumeration value="Asian" />
+			<enumeration value="Black or African American" />
+			<enumeration value="Native Hawaiian or Other Pacific Islander" />
+			<enumeration value="Not Reported" />
+			<enumeration value="Unknown" />
+			<enumeration value="White" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="Ethnicity">
+		<annotation>
+			<documentation>List of Ethnicity codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Hispanic or Latino" />
+			<enumeration value="Not Hispanic or Latino" />
+			<enumeration value="Not Reported" />
+			<enumeration value="Unknown" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="MethodOfPayment">
+		<annotation>
+			<documentation>List of Method Of Payment codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+
+			<enumeration value="PRIVATE" />
+
+			<enumeration value="MEDICARE" />
+
+			<enumeration value="MEDICARE_AND_PRIVATE" />
+
+			<enumeration value="MEDICAID" />
+
+			<enumeration value="MEDICAID_AND_MEDICARE" />
+
+			<enumeration value="MILITARY_OR_VETERANS" />
+
+			<enumeration value="MILITARY" />
+
+			<enumeration value="VETERANS" />
+
+			<enumeration value="SELF" />
+
+			<enumeration value="NO_MEANS_OF_PAYMENT" />
+
+			<enumeration value="MANAGED_CARE" />
+
+			<enumeration value="STATE_SUPPLEMENTAL" />
+
+			<enumeration value="OTHER" />
+
+			<enumeration value="UNKNOWN" />
+
+
+		</restriction>
+	</simpleType>
+
+	<complexType name="DiseaseCode">
+		<annotation>
+			<documentation>Disease Code.
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="string">
+				<attribute name="codeSystem" use="required">
+					<simpleType>
+						<restriction base="string">
+							<enumeration value="SDC" />
+							<enumeration value="ICD-O-3" />
+							<enumeration value="ICD10" />
+							<enumeration value="ICD9" />
+							<enumeration value="Legacy Codes - CTEP" />
+						</restriction>
+					</simpleType>
+				</attribute>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="StudySubject" final="#all" block="#all">
+		<sequence>
+			<element name="identifier">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1" />
+						<maxLength value="200" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="birthDate" type="date" />
+			<element name="gender" type="tns:Gender" />
+			<element name="race" type="tns:Race" maxOccurs="7" />
+			<element name="ethnicity" type="tns:Ethnicity" />
+			<element name="country" type="tns:CountryISO-3166-1-alpha-3-Code" />
+			<element name="zipCode" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1" />
+						<maxLength value="16" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="registrationDate" type="date" />
+			<element name="methodOfPayment" type="tns:MethodOfPayment"
+				minOccurs="0" />
+			<element name="disease" type="tns:DiseaseCode" minOccurs="0">
+				<annotation>
+					<documentation><![CDATA[This element should contain a valid disease code using the coding system specified in the <codeSystem> element. 
+                            When the disease <codeSystem> = "ICD-O-3", then either the <disease> or the <siteDisease> is mandatory.
+					]]></documentation>
+				</annotation>
+			</element>
+			<element name="siteDisease" type="tns:DiseaseCode" minOccurs="0">
+				<annotation>
+					<documentation><![CDATA[This element is only applicable when the disease <codeSystem> = "ICD-O-3".  
+					It should contains a valid ICD-O-3 body site code. Example: use the code "C34.1" if the disease's body site is "Upper lobe, lung".
+When the disease <codeSystem> = "ICD-O-3", then either the <disease> or the <siteDisease> is mandatory.					
+					]]></documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="CountryISO-3166-1-alpha-3-Code">
+		<annotation>
+			<documentation>ISO 3166-1 alpha-3 codes are three-letter country
+				codes defined in ISO 3166-1
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="AFG" />
+			<enumeration value="ALA" />
+			<enumeration value="ALB" />
+			<enumeration value="DZA" />
+			<enumeration value="ASM" />
+			<enumeration value="AND" />
+			<enumeration value="AGO" />
+			<enumeration value="AIA" />
+			<enumeration value="ATA" />
+			<enumeration value="ATG" />
+			<enumeration value="ARG" />
+			<enumeration value="ARM" />
+			<enumeration value="ABW" />
+			<enumeration value="AUS" />
+			<enumeration value="AUT" />
+			<enumeration value="AZE" />
+			<enumeration value="BHS" />
+			<enumeration value="BHR" />
+			<enumeration value="BGD" />
+			<enumeration value="BRB" />
+			<enumeration value="BLR" />
+			<enumeration value="BEL" />
+			<enumeration value="BLZ" />
+			<enumeration value="BEN" />
+			<enumeration value="BMU" />
+			<enumeration value="BTN" />
+			<enumeration value="BOL" />
+			<enumeration value="BIH" />
+			<enumeration value="BWA" />
+			<enumeration value="BVT" />
+			<enumeration value="BRA" />
+			<enumeration value="IOT" />
+			<enumeration value="BRN" />
+			<enumeration value="BGR" />
+			<enumeration value="BFA" />
+			<enumeration value="BDI" />
+			<enumeration value="KHM" />
+			<enumeration value="CMR" />
+			<enumeration value="CAN" />
+			<enumeration value="CPV" />
+			<enumeration value="CYM" />
+			<enumeration value="CAF" />
+			<enumeration value="TCD" />
+			<enumeration value="CHL" />
+			<enumeration value="CHN" />
+			<enumeration value="CXR" />
+			<enumeration value="CCK" />
+			<enumeration value="COL" />
+			<enumeration value="COM" />
+			<enumeration value="COG" />
+			<enumeration value="COD" />
+			<enumeration value="COK" />
+			<enumeration value="CRI" />
+			<enumeration value="CIV" />
+			<enumeration value="HRV" />
+			<enumeration value="CUB" />
+			<enumeration value="CYP" />
+			<enumeration value="CZE" />
+			<enumeration value="DNK" />
+			<enumeration value="DJI" />
+			<enumeration value="DMA" />
+			<enumeration value="DOM" />
+			<enumeration value="ECU" />
+			<enumeration value="EGY" />
+			<enumeration value="SLV" />
+			<enumeration value="GNQ" />
+			<enumeration value="ERI" />
+			<enumeration value="EST" />
+			<enumeration value="ETH" />
+			<enumeration value="FLK" />
+			<enumeration value="FRO" />
+			<enumeration value="FJI" />
+			<enumeration value="FIN" />
+			<enumeration value="FRA" />
+			<enumeration value="GUF" />
+			<enumeration value="PYF" />
+			<enumeration value="ATF" />
+			<enumeration value="GAB" />
+			<enumeration value="GMB" />
+			<enumeration value="GEO" />
+			<enumeration value="DEU" />
+			<enumeration value="GHA" />
+			<enumeration value="GIB" />
+			<enumeration value="GRC" />
+			<enumeration value="GRL" />
+			<enumeration value="GRD" />
+			<enumeration value="GLP" />
+			<enumeration value="GUM" />
+			<enumeration value="GTM" />
+			<enumeration value="GGY" />
+			<enumeration value="GIN" />
+			<enumeration value="GNB" />
+			<enumeration value="GUY" />
+			<enumeration value="HTI" />
+			<enumeration value="HMD" />
+			<enumeration value="VAT" />
+			<enumeration value="HND" />
+			<enumeration value="HKG" />
+			<enumeration value="HUN" />
+			<enumeration value="ISL" />
+			<enumeration value="IND" />
+			<enumeration value="IDN" />
+			<enumeration value="IRN" />
+			<enumeration value="IRQ" />
+			<enumeration value="IRL" />
+			<enumeration value="IMN" />
+			<enumeration value="ISR" />
+			<enumeration value="ITA" />
+			<enumeration value="JAM" />
+			<enumeration value="JPN" />
+			<enumeration value="JEY" />
+			<enumeration value="JOR" />
+			<enumeration value="KAZ" />
+			<enumeration value="KEN" />
+			<enumeration value="KIR" />
+			<enumeration value="PRK" />
+			<enumeration value="KOR" />
+			<enumeration value="KWT" />
+			<enumeration value="KGZ" />
+			<enumeration value="LAO" />
+			<enumeration value="LVA" />
+			<enumeration value="LBN" />
+			<enumeration value="LSO" />
+			<enumeration value="LBR" />
+			<enumeration value="LBY" />
+			<enumeration value="LIE" />
+			<enumeration value="LTU" />
+			<enumeration value="LUX" />
+			<enumeration value="MAC" />
+			<enumeration value="MKD" />
+			<enumeration value="MDG" />
+			<enumeration value="MWI" />
+			<enumeration value="MYS" />
+			<enumeration value="MDV" />
+			<enumeration value="MLI" />
+			<enumeration value="MLT" />
+			<enumeration value="MHL" />
+			<enumeration value="MTQ" />
+			<enumeration value="MRT" />
+			<enumeration value="MUS" />
+			<enumeration value="MYT" />
+			<enumeration value="MEX" />
+			<enumeration value="FSM" />
+			<enumeration value="MDA" />
+			<enumeration value="MCO" />
+			<enumeration value="MNG" />
+			<enumeration value="MNE" />
+			<enumeration value="MSR" />
+			<enumeration value="MAR" />
+			<enumeration value="MOZ" />
+			<enumeration value="MMR" />
+			<enumeration value="NAM" />
+			<enumeration value="NRU" />
+			<enumeration value="NPL" />
+			<enumeration value="NLD" />
+			<enumeration value="ANT" />
+			<enumeration value="NCL" />
+			<enumeration value="NZL" />
+			<enumeration value="NIC" />
+			<enumeration value="NER" />
+			<enumeration value="NGA" />
+			<enumeration value="NIU" />
+			<enumeration value="NFK" />
+			<enumeration value="MNP" />
+			<enumeration value="NOR" />
+			<enumeration value="OMN" />
+			<enumeration value="PAK" />
+			<enumeration value="PLW" />
+			<enumeration value="PSE" />
+			<enumeration value="PAN" />
+			<enumeration value="PNG" />
+			<enumeration value="PRY" />
+			<enumeration value="PER" />
+			<enumeration value="PHL" />
+			<enumeration value="PCN" />
+			<enumeration value="POL" />
+			<enumeration value="PRT" />
+			<enumeration value="PRI" />
+			<enumeration value="QAT" />
+			<enumeration value="REU" />
+			<enumeration value="ROU" />
+			<enumeration value="RUS" />
+			<enumeration value="RWA" />
+			<enumeration value="BLM" />
+			<enumeration value="SHN" />
+			<enumeration value="KNA" />
+			<enumeration value="LCA" />
+			<enumeration value="MAF" />
+			<enumeration value="SPM" />
+			<enumeration value="VCT" />
+			<enumeration value="WSM" />
+			<enumeration value="SMR" />
+			<enumeration value="STP" />
+			<enumeration value="SAU" />
+			<enumeration value="SEN" />
+			<enumeration value="SRB" />
+			<enumeration value="SYC" />
+			<enumeration value="SLE" />
+			<enumeration value="SGP" />
+			<enumeration value="SVK" />
+			<enumeration value="SVN" />
+			<enumeration value="SLB" />
+			<enumeration value="SOM" />
+			<enumeration value="ZAF" />
+			<enumeration value="SGS" />
+			<enumeration value="ESP" />
+			<enumeration value="LKA" />
+			<enumeration value="SDN" />
+			<enumeration value="SUR" />
+			<enumeration value="SJM" />
+			<enumeration value="SWZ" />
+			<enumeration value="SWE" />
+			<enumeration value="CHE" />
+			<enumeration value="SYR" />
+			<enumeration value="TWN" />
+			<enumeration value="TJK" />
+			<enumeration value="TZA" />
+			<enumeration value="THA" />
+			<enumeration value="TLS" />
+			<enumeration value="TGO" />
+			<enumeration value="TKL" />
+			<enumeration value="TON" />
+			<enumeration value="TTO" />
+			<enumeration value="TUN" />
+			<enumeration value="TUR" />
+			<enumeration value="TKM" />
+			<enumeration value="TCA" />
+			<enumeration value="TUV" />
+			<enumeration value="UGA" />
+			<enumeration value="UKR" />
+			<enumeration value="ARE" />
+			<enumeration value="GBR" />
+			<enumeration value="USA" />
+			<enumeration value="UMI" />
+			<enumeration value="URY" />
+			<enumeration value="UZB" />
+			<enumeration value="VUT" />
+			<enumeration value="VEN" />
+			<enumeration value="VNM" />
+			<enumeration value="VGB" />
+			<enumeration value="VIR" />
+			<enumeration value="WLF" />
+			<enumeration value="ESH" />
+			<enumeration value="YEM" />
+			<enumeration value="ZMB" />
+			<enumeration value="ZWE" />
+		</restriction>
+	</simpleType>
+	
+	
+    
+ <element name="batchFile" >
+     <complexType >
+       <annotation>
+            <documentation>A batch file that can be submitted for asynchronous  processing.
+            </documentation>
+        </annotation>
+        <simpleContent >
+            <extension base="base64Binary">
+             </extension>
+        </simpleContent>
+       </complexType>
+  </element>
+
+</schema>

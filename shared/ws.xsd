@@ -1,0 +1,1568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="gov.nih.nci.pa.webservices.types"
+	xmlns:tns="gov.nih.nci.pa.webservices.types" elementFormDefault="qualified"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+	xmlns:annox="http://annox.dev.java.net" xmlns:ja="http://annox.dev.java.net/org.codehaus.jackson.annotate"
+	xmlns:po="gov.nih.nci.po.webservices.types.trimmed"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+	                    gov.nih.nci.po.webservices.types.trimmed po.xsd
+                        http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
+
+	<annotation>
+		<appinfo>
+			<jaxb:schemaBindings>
+				<jaxb:package name="gov.nih.nci.pa.webservices.types" />
+			</jaxb:schemaBindings>
+		</appinfo>
+	</annotation>
+
+	<import namespace="gov.nih.nci.po.webservices.types.trimmed"
+		schemaLocation="po.xsd" />
+
+	<element name="email">
+		<simpleType>
+			<restriction base="string">
+				<maxLength value="254" />
+				<pattern
+					value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*" />
+			</restriction>
+		</simpleType>
+	</element>
+
+
+	<element name="phone">
+		<simpleType>
+			<restriction base="string">
+				<minLength value="1" />
+				<maxLength value="32" />
+			</restriction>
+		</simpleType>
+	</element>
+
+	<element name="clinicalTrialsDotGovTrialID">
+		<annotation>
+			<documentation>The format for the ClinicalTrials.gov registry number
+				is NCT followed by an 8-digit number, e.g.: NCT00000419.
+			</documentation>
+		</annotation>
+		<simpleType>
+			<restriction base="string">
+				<pattern value="NCT[0-9]{1,47}" />
+				<maxLength value="50" />
+			</restriction>
+		</simpleType>
+	</element>
+
+	<element name="TrialRegistrationConfirmation" type="tns:TrialRegistrationConfirmation">
+		<annotation>
+			<documentation>A snapshot of basic trial information that serves as a
+				confirmation of a successful trial registration, update, or
+				amendment.
+			</documentation>
+		</annotation>
+	</element>
+
+
+
+	<complexType name="TrialRegistrationConfirmation">
+		<annotation>
+			<documentation>A snapshot of basic trial information that serves as a
+				confirmation of a successful trial registration, update, or
+				amendment.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="paTrialID" type="long">
+				<annotation>
+					<documentation>PA's internal trial identifier, which is a numerical
+						value. Immutable.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="nciTrialID">
+				<annotation>
+					<documentation>NCI ID assigned to each newly registered trial. It
+						follows a specific format (e.g. NCI-2014-00672) and stays
+						immutable
+						with a trial.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<pattern value="NCI-[0-9]{4}-[0-9]{1,8}" />
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+	<simpleType name="TrialCategory">
+		<annotation>
+			<documentation>List of trial categories.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="National" />
+			<enumeration value="Externally Peer-Reviewed" />
+			<enumeration value="Institutional" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="TrialPhase">
+		<annotation>
+			<documentation>List of trial phases.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="0" />
+			<enumeration value="I" />
+			<enumeration value="I/II" />
+			<enumeration value="II" />
+			<enumeration value="II/III" />
+			<enumeration value="III" />
+			<enumeration value="IV" />
+			<enumeration value="NA" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="PrimaryPurpose">
+		<annotation>
+			<documentation>List of trial primary purposes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Treatment" />
+			<enumeration value="Prevention" />
+			<enumeration value="Supportive Care" />
+			<enumeration value="Screening" />
+			<enumeration value="Diagnostic" />
+			<enumeration value="Health Services Research" />
+			<enumeration value="Basic Science" />
+			<enumeration value="Other" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="SecondaryPurpose">
+		<annotation>
+			<documentation>List of trial secondary purposes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Ancillary-Correlative" />
+			<enumeration value="Other" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="AccrualDiseaseTerminology">
+		<annotation>
+			<documentation>List of accrual disease terminologies.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="SDC" />
+			<enumeration value="ICD10" />
+			<enumeration value="ICD9" />
+			<enumeration value="ICD-O-3" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="NonInterventionalTrialType">
+		<annotation>
+			<documentation>Types of Non-Interventional Trials.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Observational" />
+			<enumeration value="Ancillary-Correlative" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="StudyModelCode">
+		<annotation>
+			<documentation>Study model codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Cohort" />
+			<enumeration value="Case-control" />
+			<enumeration value="Case-only" />
+			<enumeration value="Case-crossover" />
+			<enumeration value="Ecologic or community studies" />
+			<enumeration value="Family-based" />
+			<enumeration value="Other" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="TimePerspectiveCode">
+		<annotation>
+			<documentation>Time perspective codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Prospective" />
+			<enumeration value="Retrospective" />
+			<enumeration value="Cross-sectional" />
+			<enumeration value="Other" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="ResponsiblePartyType">
+		<annotation>
+			<documentation>Responsible party type.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Sponsor" />
+			<enumeration value="Principal Investigator" />
+			<enumeration value="Sponsor-Investigator" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="TrialStatusCode">
+		<annotation>
+			<documentation>Trial status codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="In Review" />
+			<enumeration value="Approved" />
+			<enumeration value="Active" />
+			<enumeration value="Enrolling by Invitation" />
+			<enumeration value="Closed to Accrual" />
+			<enumeration value="Closed to Accrual and Intervention" />
+			<enumeration value="Temporarily Closed to Accrual" />
+			<enumeration value="Temporarily Closed to Accrual and Intervention" />
+			<enumeration value="Withdrawn" />
+			<enumeration value="Administratively Complete" />
+			<enumeration value="Complete" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="RecruitmentStatus">
+		<annotation>
+			<documentation>Participating site recruitment status codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="In Review" />
+			<enumeration value="Approved" />
+			<enumeration value="Active" />
+			<enumeration value="Enrolling by Invitation" />
+			<enumeration value="Closed to Accrual" />
+			<enumeration value="Closed to Accrual and Intervention" />
+			<enumeration value="Temporarily Closed to Accrual" />
+			<enumeration value="Temporarily Closed to Accrual and Intervention" />
+			<enumeration value="Withdrawn" />
+			<enumeration value="Administratively Complete" />
+			<enumeration value="Completed" />
+		</restriction>
+	</simpleType>
+
+	<complexType name="ResponsibleParty">
+		<annotation>
+			<documentation>Provides a trial's responsible party details. Only
+				applicable to trials that
+				require uploads to ClinicalTrials.gov.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="type" type="tns:ResponsiblePartyType">
+				<annotation>
+					<documentation>
+						Type of Responsible Party of the trial. Please note
+						that this value governs the use of the next three elements.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="investigator" minOccurs="0" type="tns:Person">
+				<annotation>
+					<documentation>
+						This element can be used when responsible party
+						type
+						is
+						Sponsor-Investigator; use it to specify a
+						Responsible Party
+						Investigator, which can be different from the Trial
+						Principal
+						Investigator. If omitted, Responsible Party
+						Investigator will
+						default to the Trial
+						Principal
+						Investigator.
+
+						For other responsible
+						party types this
+						element will be ignored and
+						Responsible Party
+						Investigator will ALWAYS
+						default to the Trial
+						Principal
+						Investigator.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="investigatorTitle" type="string" minOccurs="0">
+				<annotation>
+					<documentation>
+						Title of the Responsible Party Investigator. This
+						element is not applicable and thus should be omitted
+						when
+						responsible party
+						type is Sponsor. Use it only when responsible
+						party is either Principal Investigator or
+						Sponsor-Investigator. If
+						omitted, title will default to "Principal Investigator".
+					</documentation>
+				</annotation>
+			</element>
+			<element name="investigatorAffiliation" minOccurs="0"
+				type="tns:Organization">
+				<annotation>
+					<documentation>
+						An Organization that Responsible Party Investigator
+						is affiliated
+						with. Use this element
+						only when responsible party
+						type is Principal Investigator. If omitted, affiliation will
+						default to Trial Sponsor organization.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="OrganizationOrPersonID">
+		<annotation>
+			<documentation>
+				Every Organization or Person in CTRP normally can be
+				uniquely identified
+				by either a numeric PO ID (preferred)
+				or a CTEP
+				ID. In most cases when you need to refer to an existing Organization
+				or Person, you can use either type of identifier.
+			</documentation>
+		</annotation>
+		<choice>
+			<element name="poID" type="long" />
+			<element name="ctepID">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1" />
+					</restriction>
+				</simpleType>
+			</element>
+		</choice>
+	</complexType>
+
+	<complexType name="EmailOrPhone">
+		<annotation>
+			<documentation>
+				Email or phone or both.
+			</documentation>
+		</annotation>
+		<choice>
+			<sequence>
+				<element ref="tns:email" />
+				<element ref="tns:phone" minOccurs="0" />
+			</sequence>
+			<element ref="tns:phone" />
+		</choice>
+	</complexType>
+
+	<complexType name="Organization">
+		<annotation>
+			<documentation>Represents information about an Organization that
+				plays a role (Lead Organization, Sponsor, etc) on a
+				trial. Every
+				organization ultimately must exist in NCI PO (Curation) Tool. If it
+				does not,
+				it has to be created in PO before a trial can be
+				registered. If you know PO ID or CTEP ID of an organization that
+				already exists, please use that in order
+				to avoid creation of
+				duplicates. It is strongly recommended that you exercise NCI PO Web
+				Services separately to search for the organization you need
+				and
+				obtain a PO ID prior to invoking CTRP Trial Registration or
+				Participating Site services. However, if you intend to create a new
+				organization, please provide organization
+				information here.
+			</documentation>
+		</annotation>
+		<sequence>
+			<choice>
+				<element name="existingOrganization" type="tns:OrganizationOrPersonID" />
+				<element name="newOrganization" type="po:Organization" />
+			</choice>
+		</sequence>
+	</complexType>
+
+	<complexType name="Person">
+		<annotation>
+			<documentation>Represents information about a Person that
+				plays a role
+				(Principal Investigator, etc) on a
+				trial. Every
+				Person ultimately must
+				exist in NCI PO (Curation) Tool. If it
+				does not,
+				it has to be created
+				in PO before a trial can be
+				registered. If you know PO ID or CTEP ID
+				of a Person that
+				already exists, please use that in order
+				to avoid
+				creation of
+				duplicates. It is strongly recommended that you exercise
+				NCI PO Web
+				Services separately to search for the Person you need
+				and
+				obtain a PO ID prior to invoking CTRP Trial Registration or
+				Participating Site services. However, if you intend to create a new
+				Person, please provide person
+				information here.
+			</documentation>
+		</annotation>
+		<sequence>
+			<choice>
+				<element name="existingPerson" type="tns:OrganizationOrPersonID" />
+				<element name="newPerson" type="po:Person" />
+			</choice>
+		</sequence>
+	</complexType>
+
+	<simpleType name="OtherDescription">
+		<annotation>
+			<documentation>Whenever a trial attribute, such as Primary Purpose,
+				is set to 'Other', often an additional description is required. This
+				XML type defines such a description.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<maxLength value="200" />
+			<minLength value="1" />
+		</restriction>
+	</simpleType>
+
+	<complexType name="TrialDateType">
+		<annotation>
+			<documentation>Defines a type of a trial date that is either actual
+				or anticipated. 'N/A' is only applicable to Primary Completion Date
+				and only on DCP trials.
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="date">
+				<attribute name="type" use="required">
+					<simpleType>
+						<restriction base="string">
+							<enumeration value="Actual" />
+							<enumeration value="Anticipated" />
+							<enumeration value="N/A" />
+						</restriction>
+					</simpleType>
+				</attribute>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<complexType name="TrialDocument">
+		<annotation>
+			<documentation>A Trial Document. CTRP accepts most standard document
+				types. For additional information about what document types are
+				accepted, please refer to the Help section.
+			</documentation>
+		</annotation>
+		<simpleContent>
+			<extension base="base64Binary">
+				<attribute name="filename" use="required" type="string" />
+			</extension>
+		</simpleContent>
+	</complexType>
+
+
+	<complexType name="InterventionalTrialDesign">
+		<annotation>
+			<documentation>Design details of an Interventional trial.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="secondaryPurpose" type="tns:SecondaryPurpose"
+				minOccurs="0" />
+			<element name="secondaryPurposeOtherDescription" type="tns:OtherDescription"
+				minOccurs="0">
+				<annotation>
+					<documentation>If Trial Secondary Purpose is 'Other', please
+						provide
+						an additional description of the trial's purpose using this
+						element.
+					</documentation>
+				</annotation>
+			</element>
+
+		</sequence>
+	</complexType>
+
+	<simpleType name="HolderType">
+		<annotation>
+			<documentation>Type of IND/IDE holder.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Investigator" />
+			<enumeration value="Organization" />
+			<enumeration value="Industry" />
+			<enumeration value="NIH" />
+			<enumeration value="NCI" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="GrantorCode">
+		<annotation>
+			<documentation>Organization that holds the IND/IDE
+				approval.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="CDER" />
+			<enumeration value="CBER" />
+			<enumeration value="CDRH" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="NihInstitutionCode">
+		<annotation>
+			<documentation>NIH Institutions Codes
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<!-- * National Eye Institute. -->
+			<enumeration value="NEI" />
+			<!-- National Heart, Lung, and Blood Institute. -->
+			<enumeration value="NHLBI" />
+			<!-- National Human Genome Research Institute. -->
+			<enumeration value="NHGRI" />
+			<!-- National Institute on Aging. -->
+			<enumeration value="NIA" />
+			<!-- National Institute on Alcohol Abuse and Alcoholism. -->
+			<enumeration value="NIAAA" />
+			<!-- National Institute of Allergy and Infectious Diseases. -->
+			<enumeration value="NIAID" />
+			<!-- National Institute of Arthritis and Musculoskeletal and Skin Diseases. -->
+			<enumeration value="NIAMS" />
+			<!-- National Institute of Biomedical Imaging and Bioengineering. -->
+			<enumeration value="NIBIB" />
+			<!-- Eunice Kennedy Shriver National Institute of Child Health and Human 
+				Development. -->
+			<enumeration value="NICHD" />
+			<!-- <enumeration value="National Institute on Deafness and Other Communication 
+				Disorders. -->
+			<enumeration value="NIDCD" />
+			<!-- National Institute of Dental and Craniofacial Research. -->
+			<enumeration value="NIDCR" />
+			<!-- National Institute of Diabetes and Digestive and Kidney Diseases. -->
+			<enumeration value="NIDDK" />
+			<!-- National Institute on Drug Abuse. -->
+			<enumeration value="NIDA" />
+			<!-- National Institute of Environmental Health Sciences. -->
+			<enumeration value="NIEHS" />
+			<!-- National Institute of General Medical Sciences. -->
+			<enumeration value="NIGMS" />
+			<!-- National Institute of Mental Health. -->
+			<enumeration value="NIMH" />
+			<!-- National Institute of Neurological Disorders and Stroke. -->
+			<enumeration value="NINDS" />
+			<!-- National Institute of Nursing Research. -->
+			<enumeration value="NINR" />
+			<!-- National Library of Medicine. -->
+			<enumeration value="NLM" />
+			<!-- Center for Information Technology. -->
+			<enumeration value="CIT" />
+			<!-- Center for Scientific Review. -->
+			<enumeration value="CSR" />
+			<!-- John E. Fogarty International Center for Advanced Study in the Health 
+				Sciences. -->
+			<enumeration value="FIC" />
+			<!-- National Center for Complementary and Alternative Medicine. -->
+			<enumeration value="NCCAM" />
+			<!-- National Center on Minority Health and Health Disparities. -->
+			<enumeration value="NCMHD" />
+			<!-- National Center for Research Resources (NCRR). -->
+			<enumeration value="NCRR" />
+			<!-- NIH Clinical Center. -->
+			<enumeration value="CC" />
+			<!-- Office of the Director. -->
+			<enumeration value="OD" />
+
+		</restriction>
+	</simpleType>
+
+	<simpleType name="NciDivisionProgramCode">
+		<annotation>
+			<documentation>NCI Division Program Codes.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<!-- CCR-Center for Cancer Research. -->
+			<enumeration value="CCR" />
+			<!-- Center for Cancer Training / Cancer Training Branch. -->
+			<enumeration value="CCT/CTB" />
+			<!-- CIP-Cancer Imaging Program. -->
+			<enumeration value="CIP" />
+			<!-- CDP-Cancer Diagnosis Program. -->
+			<enumeration value="CDP" />
+			<!-- CTEP-Cancer Therapy Evaluation Program. -->
+			<enumeration value="CTEP" />
+			<!-- DCB-Division of Cancer Biology. -->
+			<enumeration value="DCB" />
+			<!-- DCCPS-Division of Cancer Control and Population Sciences. -->
+			<enumeration value="DCCPS" />
+			<!-- DCEG-Division of Cancer Epidemiology and Genetics. -->
+			<enumeration value="DCEG" />
+			<!-- DCP-Division of Cancer Prevention. -->
+			<enumeration value="DCP" />
+			<!-- DEA-Division of Extramural Activities. -->
+			<enumeration value="DEA" />
+			<!-- DTP-Developmental Therapeutics Program. -->
+			<enumeration value="DTP" />
+			<!-- OD-Office of the Director, NCI, NIH. -->
+			<enumeration value="OD" />
+			<!-- OSB/SPOREs -Organ Systems Branch (OSB) /Specialized Programs of Research 
+				Excellence (SPOREs). -->
+			<enumeration value="OSB/SPOREs" />
+			<!-- TRP-Translational Research Program. -->
+			<enumeration value="TRP" />
+			<!-- RRP-Radiation Research Program. -->
+			<enumeration value="RRP" />
+			<!--* . -->
+			<enumeration value="N/A" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="ExpandedAccessType">
+		<annotation>
+			<documentation>If the study includes expanded access, select the
+				access type indicating availability of an experimental drug or
+				device outside any clinical trial protocol.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="Available" />
+			<enumeration value="No longer available" />
+			<enumeration value="Temporarily not available" />
+			<enumeration value="Approved for marketing" />
+		</restriction>
+	</simpleType>
+
+	<complexType name="IND_IDE">
+		<annotation>
+			<documentation>Captures information about an Investigational New Drug
+				(IND)
+				application or an Investigational
+				Device Exemption (IDE) used on
+				the trial.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="number" type="string">
+				<annotation>
+					<documentation>Enter the number assigned to an Investigational New
+						Drug Application (IND) or Investigational Device Exemption (IDE).
+						You can enter the IND number in many formats. For example, for a
+						biologics (BB) IND that contains the number 1234, you can type
+						BB1234, 1234, or BB_1234.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="grantor" type="tns:GrantorCode">
+				<annotation>
+					<documentation>Select the organization that holds the IND/IDE
+						approval. Typically, CDER or CBER.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="holderType" type="tns:HolderType">
+				<annotation>
+					<documentation>Select the type of IND/IDE holder.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="nihInstitution" type="tns:NihInstitutionCode"
+				minOccurs="0">
+				<annotation>
+					<documentation>If the holder type is NIH, select the NIH
+						Institution.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="nciDivisionProgramCode" type="tns:NciDivisionProgramCode"
+				minOccurs="0">
+				<annotation>
+					<documentation>If the holder type is NCI, select the NCI
+						Division
+						Program Code.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="expandedAccess" type="boolean">
+				<annotation>
+					<documentation>Indicates whether or not an experimental drug or
+						device is available outside any clinical trial protocol.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="expandedAccessType" type="tns:ExpandedAccessType"
+				minOccurs="0">
+				<annotation>
+					<documentation>If the study includes expanded access, select the
+						access type indicating availability of an experimental drug or
+						device outside any clinical trial protocol.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="exempt" type="boolean">
+				<annotation>
+					<documentation>Indicates whether or not the trial is associated
+						with the U.S.
+						FDA and does not require IRB approval.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Grant">
+		<annotation>
+			<documentation>Captures information about a grant that a trial is
+				funded with.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="fundingMechanism">
+				<annotation>
+					<documentation>Select the NIH funding mechanism unique identifier,
+						a 3-character code used to identify areas of extramural research
+						activity applied to funding mechanisms.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<pattern value="[A-Z0-9]{3}" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="nihInstitutionCode">
+				<annotation>
+					<documentation>Select the two-letter code identifying the first
+						major-level subdivision, the organization that supports an NIH
+						grant, contract, or inter-agency agreement. The support may be
+						financial or administrative.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<pattern value="[A-Z]{2}" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="serialNumber">
+				<annotation>
+					<documentation>Enter the number generally assigned sequentially to
+						a series within an Institute, Center, or Division.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<pattern value="[0-9]{1,200}" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="nciDivisionProgramCode" type="tns:NciDivisionProgramCode">
+				<annotation>
+					<documentation>Select the NCI organizational unit that provides
+						funding for the study.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="fundingPercentage" minOccurs="0" type="float" />
+		</sequence>
+	</complexType>
+
+	<complexType name="NonInterventionalTrialDesign">
+		<annotation>
+			<documentation>Design details of a Non-Interventional trial.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="trialType" type="tns:NonInterventionalTrialType" />
+			<element name="studyModelCode" type="tns:StudyModelCode" />
+			<element name="studyModelCodeOtherDescription" type="tns:OtherDescription"
+				minOccurs="0">
+				<annotation>
+					<documentation>If Trial Study Model Code is 'Other', please provide
+						an additional description using this
+						element.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="timePerspectiveCode" type="tns:TimePerspectiveCode" />
+			<element name="timePerspectiveCodeOtherDescription" type="tns:OtherDescription"
+				minOccurs="0">
+				<annotation>
+					<documentation>If Time Perspective Code is 'Other', please provide
+						an additional description using this
+						element.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="RegulatoryInformation">
+		<annotation>
+			<documentation>Trial Regulatory Information. Required only for trials
+				that require uploads into ClinicalTrials.gov.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="country" type="po:CountryISO-3166-1-alpha-3-Code">
+				<annotation>
+					<documentation>Specify the country in which the Trial Oversight
+						Authority is located. Use country's 3-digit ISO code.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="authorityName" type="string">
+				<annotation>
+					<documentation>Select the name of each national or international
+						health organization with authority over the protocol. Authority
+						name must be known to CTRP. The list of authorities known by CTRP
+						is quite large and volatile;
+						please contact CTRP Analysts or CTRO
+						Office for details. Failure to find a match in CTRP by name will
+						cause the entire trial registration to fail.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="fdaRegulated" type="boolean">
+				<annotation>
+					<documentation>Indicate whether this trial includes an intervention
+						subject to US Food and Drug Administration regulation under
+						section 351 of the Public Health Service Act or any of the
+						following sections of the Federal Food, Drug and Cosmetic Act:
+						505, 510(k), 515, 52.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="section801" type="boolean">
+				<annotation>
+					<documentation>Indicate whether this is an 'applicable clinical
+						trial' as defined in US Public Law 110-85, Title VIII, Section
+						801.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="delayedPosting" type="boolean">
+				<annotation>
+					<documentation>Indicate whether this trial includes a device NOT
+						previously approved or cleared by the US FDA for any use, as
+						specified in US Public Law 110-85, Title VIII, Section 801.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="dataMonitoringCommitteeAppointed" type="boolean">
+				<annotation>
+					<documentation>Indicate whether a data monitoring committee has
+						been appointed for this study.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<element name="CompleteTrialRegistration" type="tns:CompleteTrialRegistration">
+		<annotation>
+			<documentation>A request to register a Complete trial in CTRP.
+			</documentation>
+		</annotation>
+	</element>
+
+	<element name="CompleteTrialAmendment" type="tns:CompleteTrialAmendment">
+		<annotation>
+			<documentation>A request to amend a Complete trial in CTRP.
+			</documentation>
+		</annotation>
+	</element>
+
+	<element name="CompleteTrialUpdate" type="tns:CompleteTrialUpdate">
+		<annotation>
+			<documentation>A request to update a Complete trial in CTRP. An
+				update permits trial owners to change a limited set
+				of data element
+				of the trial. Most of the elements are optional; if you omit an
+				element, corresponding trial data will remain unchanged.
+			</documentation>
+		</annotation>
+	</element>
+
+	<element name="AbbreviatedTrialUpdate" type="tns:AbbreviatedTrialUpdate">
+		<annotation>
+			<documentation>A request to update an Abbreviated trial in CTRP. An
+				update permits trial owners to change a very limited set
+				of data
+				element
+				of an Abbreviated trial. Most of the elements are optional;
+				if you
+				omit an
+				element, corresponding trial data will remain
+				unchanged.
+			</documentation>
+		</annotation>
+	</element>
+
+	<element name="ParticipatingSiteUpdate" type="tns:ParticipatingSiteUpdate">
+		<annotation>
+			<documentation>Represents an update to a participating site. Since an
+				update to a site cannot change the organization, this type excludes
+				the organization element.
+			</documentation>
+		</annotation>
+	</element>
+
+	<element name="ParticipatingSite" type="tns:ParticipatingSite">
+		<annotation>
+			<documentation>Represents a new or existing participating site on a
+				trial: this
+				includes organization information.
+			</documentation>
+		</annotation>
+	</element>
+
+	<element name="sites">
+		<annotation>
+			<documentation>List of participating sites.
+			</documentation>
+		</annotation>
+		<complexType>
+			<sequence>
+				<element name="site" type="tns:ParticipatingSite" minOccurs="0"
+					maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="AbbreviatedTrialUpdate" final="#all"
+		block="#all">
+		<annotation>
+			<documentation>A request to update an Abbreviated trial in CTRP. An
+				update permits trial owners to change a very limited set
+				of data
+				element
+				of an Abbreviated trial. Most of the elements are optional;
+				if you
+				omit an
+				element, corresponding trial data will remain
+				unchanged.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element ref="tns:clinicalTrialsDotGovTrialID" minOccurs="0">
+				<annotation>
+					<documentation>
+						If the trial does not currently specify a
+						ClinicalTrials.Gov ID
+						(a.k.a NCT ID), you can provide one during
+						the update.
+						If the trial does have a ClinicalTrials.Gov ID already,
+						your update
+						will not be allowed to change it; an attempt to do so
+						will be ignored by CTRP.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="irbApprovalDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>To ensure successful registration, upload a IRB
+						Approval document
+						document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="informedConsentDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>If the Protocol document does not include the
+						Informed Consent and/or participating sites, upload the Informed
+						Consent document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="otherDocument" type="tns:TrialDocument"
+				minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Any other trial-related document.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="CompleteTrialUpdate" final="#all" block="#all">
+		<annotation>
+			<documentation>A request to update a Complete trial in CTRP. An
+				update permits trial owners to change a limited set
+				of data element
+				of the trial. Most of the elements are optional; if you omit an
+				element, corresponding trial data will remain unchanged.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element ref="tns:clinicalTrialsDotGovTrialID" minOccurs="0">
+				<annotation>
+					<documentation>
+						If the trial does not currently specify a
+						ClinicalTrials.Gov ID
+						(a.k.a NCT ID), you can provide one during
+						the update.
+						If the trial does have a ClinicalTrials.Gov ID already,
+						your update
+						will not be allowed to change it; an attempt to do so
+						will be ignored by CTRP.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="otherTrialID" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Enter an additional trial identifier such as a
+						unique identifier from other registries, NIH grant numbers, or
+						protocol numbers assigned by the Review Board. Any values you
+						provide during a trial update will be
+						added to the list of the
+						existing trial's other identifiers.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1" />
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="accrualDiseaseTerminology" type="tns:AccrualDiseaseTerminology"
+				minOccurs="0">
+				<annotation>
+					<documentation>A change to the trial's disease terminology
+						will be
+						ignored if the trial has
+						accrued study subjects with disease codes
+						under the existing terminology.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="grant" type="tns:Grant" minOccurs="0"
+				maxOccurs="unbounded">
+				<annotation>
+					<documentation>Grants specified during a trial update will be added
+						to the existing trial's grant list.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="trialStatus" type="tns:TrialStatusCode"
+				minOccurs="0" />
+			<element name="whyStopped" minOccurs="0">
+				<annotation>
+					<documentation>If the trial is Administratively Complete,
+						Withdrawn, or Temporarily Closed, enter the reason that the study
+						stopped.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="160" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="trialStatusDate" type="date" minOccurs="0" />
+			<element name="trialStartDate" type="tns:TrialDateType"
+				minOccurs="0">
+				<annotation>
+					<documentation>If specified, its type can be either Anticipated or
+						Actual.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="primaryCompletionDate" type="tns:TrialDateType"
+				nillable="true" minOccurs="0">
+				<annotation>
+					<documentation>Primary completion date is normally required for all
+						trial submissions. The only exception is the DCP trials: they can
+						have an empty Primary Completion Date of type 'N/A'.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="completionDate" type="tns:TrialDateType"
+				minOccurs="0">
+				<annotation>
+					<documentation>If specified, its type can be either Anticipated or
+						Actual.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="protocolDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>To ensure successful registration, upload a Protocol
+						document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="irbApprovalDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>To ensure successful registration, upload a IRB
+						Approval document
+						document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="participatingSitesDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>This document includes site recruitment status and
+						date, target accrual, and site principal investigators.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="informedConsentDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>If the Protocol document does not include the
+						Informed Consent and/or participating sites, upload the Informed
+						Consent document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="otherDocument" type="tns:TrialDocument"
+				minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Any other trial-related document.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="CompleteTrialRegistration" final="#all"
+		block="#all">
+		<annotation>
+			<documentation>A request to register a new Complete trial in CTRP.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="tns:BaseTrialInformation">
+				<sequence>
+					<element name="category" type="tns:TrialCategory" />
+					<element name="trialOwner" minOccurs="0" maxOccurs="unbounded">
+						<annotation>
+							<documentation>
+								Identifies an owner of this trial by an email
+								address. Email address must be known to CTRP in order for the
+								ownership
+								to be established.
+							</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="254" />
+								<pattern
+									value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*" />
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="CompleteTrialAmendment" final="#all"
+		block="#all">
+		<annotation>
+			<documentation>A request to amend a Complete trial in CTRP.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="tns:BaseTrialInformation">
+				<sequence>
+					<element name="amendmentNumber" minOccurs="0">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="200" />
+								<minLength value="1" />
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="amendmentDate" type="date" />
+					<element name="ctepIdentifier" type="string" minOccurs="0" />
+					<element name="changeMemoDocument" type="tns:TrialDocument"
+						minOccurs="0">
+						<annotation>
+							<documentation>Contains a summary of changes to the original, or
+								last amended, trial submission.One or the other of the Change
+								Memo and Protocol Highlight documents is required. You do not
+								have to submit both of these documents.
+							</documentation>
+						</annotation>
+					</element>
+					<element name="protocolHighlightDocument" type="tns:TrialDocument"
+						minOccurs="0">
+						<annotation>
+							<documentation>One or the other of the Change Memo and Protocol
+								Highlight documents is required. You do not have to submit both
+								of these documents.
+							</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+
+	<complexType name="BaseTrialInformation" abstract="true"
+		block="restriction" final="restriction">
+		<annotation>
+			<documentation>Trial information common to Registration and Amendment
+				requests.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="clinicalTrialsDotGovXmlRequired" type="boolean">
+				<annotation>
+					<documentation>Indicates whether your trial needs to be submitted
+						to/updated in ClinicalTrials.Gov via CTRP Nightly
+						ClinicalTrials.Gov XML Upload process.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="leadOrgTrialID">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30" />
+						<minLength value="1" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element ref="tns:clinicalTrialsDotGovTrialID" minOccurs="0" />
+			<element name="dcpIdentifier" type="string" minOccurs="0" />
+			<element name="otherTrialID" minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Enter an additional trial identifier such as a
+						unique identifier from other registries, NIH grant numbers, or
+						protocol numbers assigned by the Review Board. In case of an
+						Amendment, the identifiers you specify will be
+						appended to the
+						existing ones.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<minLength value="1" />
+						<maxLength value="255" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="title">
+				<annotation>
+					<documentation>Enter the name of the clinical trial as it appears
+						in the protocol document.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="4000" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="phase" type="tns:TrialPhase" />
+			<element name="pilot" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>If trial phase is not applicable, please indicate
+						whether or not this is a pilot trial.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="accrualDiseaseTerminology" type="tns:AccrualDiseaseTerminology" />
+			<element name="primaryPurpose" type="tns:PrimaryPurpose" />
+			<element name="primaryPurposeOtherDescription" type="tns:OtherDescription"
+				minOccurs="0">
+				<annotation>
+					<documentation>If Trial Primary Purpose is 'Other', please provide
+						an additional description of the trial's purpose using this
+						element.
+					</documentation>
+				</annotation>
+			</element>
+			<choice>
+				<annotation>
+					<documentation>A trial's design can be either Interventional or
+						Non-Interventional. Please provide corresponding design details.
+						Please note: an Amendment cannot change
+						a trial from Interventional
+						to Non-Interventional or vice versa.
+					</documentation>
+				</annotation>
+				<element name="interventionalDesign" type="tns:InterventionalTrialDesign" />
+				<element name="nonInterventionalDesign" type="tns:NonInterventionalTrialDesign" />
+			</choice>
+			<element name="leadOrganization" type="tns:Organization" />
+			<element name="pi" type="tns:Person" />
+			<element name="sponsor" type="tns:Organization" minOccurs="0">
+				<annotation>
+					<documentation>Sponsor should not be specified if
+						clinicalTrialsDotGovXmlRequired is false.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="responsibleParty" type="tns:ResponsibleParty"
+				minOccurs="0">
+				<annotation>
+					<documentation>Responsible Party should not be specified if
+						clinicalTrialsDotGovXmlRequired is false.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="summary4FundingSponsor" type="tns:Organization"
+				maxOccurs="unbounded" />
+			<element name="programCode" type="string" minOccurs="0" />
+			<element name="fundedByNciGrant" type="boolean" />
+			<element name="grant" type="tns:Grant" minOccurs="0"
+				maxOccurs="unbounded" />
+			<element name="trialStatus" type="tns:TrialStatusCode" />
+			<element name="whyStopped" minOccurs="0">
+				<annotation>
+					<documentation>If the trial is Administratively Complete,
+						Withdrawn, or Temporarily Closed, enter the reason that the study
+						stopped.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="160" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="trialStatusDate" type="date" />
+			<element name="trialStartDate" type="tns:TrialDateType">
+				<annotation>
+					<documentation>If specified, its type can be either Anticipated or
+						Actual.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="primaryCompletionDate" type="tns:TrialDateType"
+				nillable="true">
+				<annotation>
+					<appinfo>
+						<jaxb:property generateElementProperty="true" />
+					</appinfo>
+					<documentation>Primary completion date is normally required for all
+						trial submissions. The only exception is the DCP trials: they can
+						have an empty Primary Completion Date of type 'N/A'.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="completionDate" type="tns:TrialDateType"
+				minOccurs="0">
+				<annotation>
+					<documentation>If specified, its type can be either Anticipated or
+						Actual.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="ind" type="tns:IND_IDE" minOccurs="0"
+				maxOccurs="unbounded" />
+			<element name="ide" type="tns:IND_IDE" minOccurs="0"
+				maxOccurs="unbounded" />
+			<element name="regulatoryInformation" type="tns:RegulatoryInformation"
+				minOccurs="0">
+				<annotation>
+					<documentation>Regulatory Information is required if
+						clinicalTrialsDotGovXmlRequired is true and should not be
+						specified otherwise.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="protocolDocument" type="tns:TrialDocument">
+				<annotation>
+					<documentation>To ensure successful registration, upload a Protocol
+						document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="irbApprovalDocument" type="tns:TrialDocument">
+				<annotation>
+					<documentation>To ensure successful registration, upload a IRB
+						Approval document
+						document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="participatingSitesDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>This document includes site recruitment status and
+						date, target accrual, and site principal investigators.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="informedConsentDocument" type="tns:TrialDocument"
+				minOccurs="0">
+				<annotation>
+					<documentation>If the Protocol document does not include the
+						Informed Consent and/or participating sites, upload the Informed
+						Consent document.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="otherDocument" type="tns:TrialDocument"
+				minOccurs="0" maxOccurs="unbounded">
+				<annotation>
+					<documentation>Any other trial-related document.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ParticipatingSite" final="#all" block="#all">
+		<annotation>
+			<documentation>Represents a new or existing participating site on a
+				trial: this
+				includes organization information.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="tns:BaseParticipatingSite">
+				<sequence>
+					<element name="organization" type="tns:Organization" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="ParticipatingSiteUpdate" final="#all"
+		block="#all">
+		<annotation>
+			<documentation>Represents an update to a participating site. Since an
+				update to a site cannot change the organization, this type excludes
+				the organization element.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="tns:BaseParticipatingSite">
+				<sequence />
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="BaseParticipatingSite" abstract="true">
+		<annotation>
+			<documentation>A participating site on a trial.
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="recruitmentStatus" type="tns:RecruitmentStatus" />
+			<element name="recruitmentStatusDate" type="date" />
+			<element name="localTrialIdentifier" type="string" />
+			<element name="programCode" type="string" minOccurs="0">
+				<annotation>
+					<documentation>
+						Cancer Center Trials: Program codes that
+						are not on
+						the master list of the site's organization family will be ignored.
+						The
+						submission will not fail, however.
+
+						Non-Cancer Center Trials: Any
+						program codes specified within this element
+						will be ignored.
+
+						Please
+						contact CTRP analysts for additional information.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="openedForAccrual" type="date" minOccurs="0">
+				<annotation>
+					<documentation>
+						Date when the site was opened for accrual can become
+						mandatory depending
+						on the recruitment status.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="closedForAccrual" type="date" minOccurs="0">
+				<annotation>
+					<documentation>
+						Date when the site was closed for accrual can become
+						mandatory depending
+						on the recruitment status.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="targetAccrualNumber" type="nonNegativeInteger"
+				minOccurs="0" />
+			<element name="investigator" maxOccurs="unbounded" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="person" type="tns:Person" />
+						<element name="role">
+							<simpleType>
+								<restriction base="string">
+									<enumeration value="Principal Investigator" />
+									<enumeration value="Sub Investigator" />
+								</restriction>
+							</simpleType>
+						</element>
+						<element name="primaryContact" type="boolean">
+							<annotation>
+								<documentation>Specifies whether or not this investigator should
+									also
+									be designated as the primary contact for the site.
+								</documentation>
+							</annotation>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="primaryContact" minOccurs="0">
+				<annotation>
+					<documentation>
+						This element allows you to specify a primary contact
+						for the site that is different from one of the site's
+						investigators.
+					</documentation>
+				</annotation>
+				<complexType>
+					<sequence>
+						<element name="person" type="tns:Person">
+							<annotation>
+								<documentation>
+									Use this element to specify a person that is the
+									site's primary contact. This can still be one of the
+									investigators or
+									a completely different person.
+								</documentation>
+							</annotation>
+						</element>
+						<element name="contactDetails" type="tns:EmailOrPhone" />
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+
+</schema>
