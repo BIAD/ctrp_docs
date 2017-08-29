@@ -1515,7 +1515,7 @@
 			</element>
 			<element name="targetAccrualNumber" type="nonNegativeInteger"
 				minOccurs="0" />
-			<element name="investigator" maxOccurs="unbounded" minOccurs="0">
+			<element name="investigator" maxOccurs="unbounded" minOccurs="1">
 				<complexType>
 					<sequence>
 						<element name="person" type="tns:Person" />
