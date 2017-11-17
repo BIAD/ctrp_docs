@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ppfml version="2.00" project="CTRP Help" type="4">
+ <windowlist>
+  <window name="CTRPHelpWindow" x="5%" y="5%" width="90%" height="90%" viewtype="doublepane" workspacestyle="DEFAULT" caption="CTRP Help" toolbar="off" locationbar="off" menu="off" resizable="yes" statusbar="off" usecurrentwindowsettings="yes">
+   <elements><element name="BrowseSequence" Present="yes" /><element name="SearchInput" Present="no" />
+   </elements>
+   <agents>
+    <agent>toc
+    </agent>
+    <agent>ndx
+    </agent>
+    <agent>nls
+    </agent>
+    <agent>gls
+    </agent>
+   </agents>
+  </window>
+ </windowlist>
+ <contextmap>
+ </contextmap>
+ <topiclist defaulttopic="CTRP_Help.htm">
+  <topic>Recording_Trial_Details.htm
+  </topic>
+  <topic>Trial_Abstraction_Tasks.htm
+  </topic>
+  <topic>Recording_Trial_Identification_Information.htm
+  </topic>
+  <topic>Trial_Registration_Reference.htm
+  </topic>
+  <topic>CTRP_Help.htm
+  </topic>
+  <topic>Registering_New_Complete_Trials.htm
+  </topic>
+  <topic>Trial_Phase_Value_Definitions.htm
+  </topic>
+  <topic>Trial_Registration_Tasks.htm
+  </topic>
+  <topic>Searching_for_Trials_in_PA.htm
+  </topic>
+  <topic>About_Trial_Registration.htm
+  </topic>
+  <topic>Registering_New_Trials.htm
+  </topic>
+  <topic>Abstracting_Central_Contacts.htm
+  </topic>
+  <topic>Abstracting_Sponsors_and_Responsible_Parties.htm
+  </topic>
+  <topic>Abstracting_Trial_Descriptions,_Titles,_and_Identifiers.htm
+  </topic>
+ </topiclist>
+ <projectincludes>
+ </projectincludes>
+ <filenamemap>
+  <filenameentry moniker="wh_languagetype">
+   <filename>en_US
+   </filename>
+  </filenameentry>
+  <filenameentry moniker="startpage">
+   <filename>index.htm
+   </filename>
+  </filenameentry>
+  <filenameentry moniker="topicpage">
+   <filename>index.htm
+   </filename>
+  </filenameentry>
+  <filenameentry moniker="keywordinfo">
+   <filename>SearchOptions.xml
+   </filename>
+  </filenameentry>
+ </filenamemap>
+</ppfml>
