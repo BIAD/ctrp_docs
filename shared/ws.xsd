@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="gov.nih.nci.pa.webservices.types"
-	xmlns:tns="gov.nih.nci.pa.webservices.types" elementFormDefault="qualified"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
-	xmlns:annox="http://annox.dev.java.net" xmlns:ja="http://annox.dev.java.net/org.codehaus.jackson.annotate"
-	xmlns:po="gov.nih.nci.po.webservices.types.trimmed"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+		xmlns:tns="gov.nih.nci.pa.webservices.types" elementFormDefault="qualified"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+		xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+		xmlns:annox="http://annox.dev.java.net" xmlns:ja="http://annox.dev.java.net/org.codehaus.jackson.annotate"
+		xmlns:po="gov.nih.nci.po.webservices.types.trimmed"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
 	                    gov.nih.nci.po.webservices.types.trimmed po.xsd
                         http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
 
@@ -18,14 +18,14 @@
 	</annotation>
 
 	<import namespace="gov.nih.nci.po.webservices.types.trimmed"
-		schemaLocation="po.xsd" />
+			schemaLocation="po.xsd" />
 
 	<element name="email">
 		<simpleType>
 			<restriction base="string">
 				<maxLength value="254" />
 				<pattern
-					value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*" />
+						value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*" />
 			</restriction>
 		</simpleType>
 	</element>
@@ -54,6 +54,19 @@
 		</simpleType>
 	</element>
 
+	<element name="expandedAccessRecord">
+		<annotation>
+			<documentation>The format for the ClinicalTrials.gov registry number
+				is NCT followed by an 8-digit number, e.g.: NCT00000419.
+			</documentation>
+		</annotation>
+		<simpleType>
+			<restriction base="string">
+				<pattern value="NCT[0-9]{8}" />
+				<maxLength value="50" />
+			</restriction>
+		</simpleType>
+	</element>
 	<element name="TrialRegistrationConfirmation" type="tns:TrialRegistrationConfirmation">
 		<annotation>
 			<documentation>A snapshot of basic trial information that serves as a
@@ -115,6 +128,7 @@
 			</documentation>
 		</annotation>
 		<restriction base="string">
+			<enumeration value="Early Phase I" />
 			<enumeration value="0" />
 			<enumeration value="I" />
 			<enumeration value="I/II" />
@@ -317,7 +331,7 @@
 				</annotation>
 			</element>
 			<element name="investigatorAffiliation" minOccurs="0"
-				type="tns:Organization">
+					 type="tns:Organization">
 				<annotation>
 					<documentation>
 						An Organization that Responsible Party Investigator
@@ -489,9 +503,9 @@
 		</annotation>
 		<sequence>
 			<element name="secondaryPurpose" type="tns:SecondaryPurpose"
-				minOccurs="0" />
+					 minOccurs="0" />
 			<element name="secondaryPurposeOtherDescription" type="tns:OtherDescription"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If Trial Secondary Purpose is 'Other', please
 						provide
@@ -553,10 +567,10 @@
 			<enumeration value="NIAMS" />
 			<!-- National Institute of Biomedical Imaging and Bioengineering. -->
 			<enumeration value="NIBIB" />
-			<!-- Eunice Kennedy Shriver National Institute of Child Health and Human 
+			<!-- Eunice Kennedy Shriver National Institute of Child Health and Human
 				Development. -->
 			<enumeration value="NICHD" />
-			<!-- <enumeration value="National Institute on Deafness and Other Communication 
+			<!-- <enumeration value="National Institute on Deafness and Other Communication
 				Disorders. -->
 			<enumeration value="NIDCD" />
 			<!-- National Institute of Dental and Craniofacial Research. -->
@@ -581,7 +595,7 @@
 			<enumeration value="CIT" />
 			<!-- Center for Scientific Review. -->
 			<enumeration value="CSR" />
-			<!-- John E. Fogarty International Center for Advanced Study in the Health 
+			<!-- John E. Fogarty International Center for Advanced Study in the Health
 				Sciences. -->
 			<enumeration value="FIC" />
 			<!-- National Center for Complementary and Alternative Medicine. -->
@@ -628,7 +642,7 @@
 			<enumeration value="DTP" />
 			<!-- OD-Office of the Director, NCI, NIH. -->
 			<enumeration value="OD" />
-			<!-- OSB/SPOREs -Organ Systems Branch (OSB) /Specialized Programs of Research 
+			<!-- OSB/SPOREs -Organ Systems Branch (OSB) /Specialized Programs of Research
 				Excellence (SPOREs). -->
 			<enumeration value="OSB/SPOREs" />
 			<!-- TRP-Translational Research Program. -->
@@ -637,6 +651,20 @@
 			<enumeration value="RRP" />
 			<!--* . -->
 			<enumeration value="N/A" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="expandedAccess">
+		<annotation>
+			<documentation>If the study includes expanded access, select the
+				access type indicating availability of an experimental drug or
+				device outside any clinical trial protocol.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="true" />
+			<enumeration value="false" />
+			<enumeration value="unknown" />
 		</restriction>
 	</simpleType>
 
@@ -689,7 +717,7 @@
 				</annotation>
 			</element>
 			<element name="nihInstitution" type="tns:NihInstitutionCode"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If the holder type is NIH, select the NIH
 						Institution.
@@ -697,7 +725,7 @@
 				</annotation>
 			</element>
 			<element name="nciDivisionProgramCode" type="tns:NciDivisionProgramCode"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If the holder type is NCI, select the NCI
 						Division
@@ -705,15 +733,16 @@
 					</documentation>
 				</annotation>
 			</element>
-			<element name="expandedAccess" type="boolean">
+			<element name="expandedAccess" type="tns:expandedAccess">
 				<annotation>
 					<documentation>Indicates whether or not an experimental drug or
 						device is available outside any clinical trial protocol.
 					</documentation>
 				</annotation>
 			</element>
+			<element ref="tns:expandedAccessRecord" minOccurs="0" />
 			<element name="expandedAccessType" type="tns:ExpandedAccessType"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If the study includes expanded access, select the
 						access type indicating availability of an experimental drug or
@@ -798,7 +827,7 @@
 			<element name="trialType" type="tns:NonInterventionalTrialType" />
 			<element name="studyModelCode" type="tns:StudyModelCode" />
 			<element name="studyModelCodeOtherDescription" type="tns:OtherDescription"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If Trial Study Model Code is 'Other', please provide
 						an additional description using this
@@ -808,7 +837,7 @@
 			</element>
 			<element name="timePerspectiveCode" type="tns:TimePerspectiveCode" />
 			<element name="timePerspectiveCodeOtherDescription" type="tns:OtherDescription"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If Time Perspective Code is 'Other', please provide
 						an additional description using this
@@ -845,6 +874,40 @@
 					</documentation>
 				</annotation>
 			</element>
+			<element name="fdaRegulatedDrug" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>Indicate whether this trial includes a drug subject
+						to US Food and Drug Administration regulation.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="fdaRegulatedDevice" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>Indicate whether this trial includes a device subject
+						to US Food and Drug Administration regulation .
+					</documentation>
+				</annotation>
+			</element>
+			<element name="approvalClearance" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>Indicate whether this trial includes a device
+						previously approved or cleared by the US FDA for any use.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="marketSurveillance" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>Indicate whether this trial includes a device
+						which needs a market surveillance.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="usaExport" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>USA export
+					</documentation>
+				</annotation>
+			</element>
 			<element name="fdaRegulated" type="boolean">
 				<annotation>
 					<documentation>Indicate whether this trial includes an intervention
@@ -863,7 +926,7 @@
 					</documentation>
 				</annotation>
 			</element>
-			<element name="delayedPosting" type="boolean">
+			<element name="delayedPosting" type="boolean" minOccurs="0">
 				<annotation>
 					<documentation>Indicate whether this trial includes a device NOT
 						previously approved or cleared by the US FDA for any use, as
@@ -947,13 +1010,13 @@
 		<complexType>
 			<sequence>
 				<element name="site" type="tns:ParticipatingSite" minOccurs="0"
-					maxOccurs="unbounded" />
+						 maxOccurs="unbounded" />
 			</sequence>
 		</complexType>
 	</element>
 
 	<complexType name="AbbreviatedTrialUpdate" final="#all"
-		block="#all">
+				 block="#all">
 		<annotation>
 			<documentation>A request to update an Abbreviated trial in CTRP. An
 				update permits trial owners to change a very limited set
@@ -982,7 +1045,7 @@
 				</annotation>
 			</element>
 			<element name="irbApprovalDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>To ensure successful registration, upload a IRB
 						Approval document
@@ -991,7 +1054,7 @@
 				</annotation>
 			</element>
 			<element name="informedConsentDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If the Protocol document does not include the
 						Informed Consent and/or participating sites, upload the Informed
@@ -1000,7 +1063,7 @@
 				</annotation>
 			</element>
 			<element name="otherDocument" type="tns:TrialDocument"
-				minOccurs="0" maxOccurs="unbounded">
+					 minOccurs="0" maxOccurs="unbounded">
 				<annotation>
 					<documentation>Any other trial-related document.
 					</documentation>
@@ -1052,7 +1115,7 @@
 				</simpleType>
 			</element>
 			<element name="accrualDiseaseTerminology" type="tns:AccrualDiseaseTerminology"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>A change to the trial's disease terminology
 						will be
@@ -1063,7 +1126,7 @@
 				</annotation>
 			</element>
 			<element name="grant" type="tns:Grant" minOccurs="0"
-				maxOccurs="unbounded">
+					 maxOccurs="unbounded">
 				<annotation>
 					<documentation>Grants specified during a trial update will be added
 						to the existing trial's grant list.
@@ -1071,7 +1134,7 @@
 				</annotation>
 			</element>
 			<element name="trialStatus" type="tns:TrialStatusCode"
-				minOccurs="0" />
+					 minOccurs="0" />
 			<element name="whyStopped" minOccurs="0">
 				<annotation>
 					<documentation>If the trial is Administratively Complete,
@@ -1087,7 +1150,7 @@
 			</element>
 			<element name="trialStatusDate" type="date" minOccurs="0" />
 			<element name="trialStartDate" type="tns:TrialDateType"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If specified, its type can be either Anticipated or
 						Actual.
@@ -1095,7 +1158,7 @@
 				</annotation>
 			</element>
 			<element name="primaryCompletionDate" type="tns:TrialDateType"
-				nillable="true" minOccurs="0">
+					 nillable="true" minOccurs="0">
 				<annotation>
 					<documentation>Primary completion date is normally required for all
 						trial submissions. The only exception is the DCP trials: they can
@@ -1104,7 +1167,7 @@
 				</annotation>
 			</element>
 			<element name="completionDate" type="tns:TrialDateType"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If specified, its type can be either Anticipated or
 						Actual.
@@ -1112,7 +1175,7 @@
 				</annotation>
 			</element>
 			<element name="protocolDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>To ensure successful registration, upload a Protocol
 						document.
@@ -1120,7 +1183,7 @@
 				</annotation>
 			</element>
 			<element name="irbApprovalDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>To ensure successful registration, upload a IRB
 						Approval document
@@ -1129,7 +1192,7 @@
 				</annotation>
 			</element>
 			<element name="participatingSitesDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>This document includes site recruitment status and
 						date, target accrual, and site principal investigators.
@@ -1137,7 +1200,7 @@
 				</annotation>
 			</element>
 			<element name="informedConsentDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If the Protocol document does not include the
 						Informed Consent and/or participating sites, upload the Informed
@@ -1146,7 +1209,7 @@
 				</annotation>
 			</element>
 			<element name="otherDocument" type="tns:TrialDocument"
-				minOccurs="0" maxOccurs="unbounded">
+					 minOccurs="0" maxOccurs="unbounded">
 				<annotation>
 					<documentation>Any other trial-related document.
 					</documentation>
@@ -1156,7 +1219,7 @@
 	</complexType>
 
 	<complexType name="CompleteTrialRegistration" final="#all"
-		block="#all">
+				 block="#all">
 		<annotation>
 			<documentation>A request to register a new Complete trial in CTRP.
 			</documentation>
@@ -1178,7 +1241,7 @@
 							<restriction base="string">
 								<maxLength value="254" />
 								<pattern
-									value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*" />
+										value="[_\-a-zA-Z0-9\.\+]+@[a-zA-Z0-9](\.?[\-a-zA-Z0-9]*[a-zA-Z0-9])*" />
 							</restriction>
 						</simpleType>
 					</element>
@@ -1188,7 +1251,7 @@
 	</complexType>
 
 	<complexType name="CompleteTrialAmendment" final="#all"
-		block="#all">
+				 block="#all">
 		<annotation>
 			<documentation>A request to amend a Complete trial in CTRP.
 			</documentation>
@@ -1207,7 +1270,7 @@
 					<element name="amendmentDate" type="date" />
 					<element name="ctepIdentifier" type="string" minOccurs="0" />
 					<element name="changeMemoDocument" type="tns:TrialDocument"
-						minOccurs="0">
+							 minOccurs="0">
 						<annotation>
 							<documentation>Contains a summary of changes to the original, or
 								last amended, trial submission.One or the other of the Change
@@ -1217,7 +1280,7 @@
 						</annotation>
 					</element>
 					<element name="protocolHighlightDocument" type="tns:TrialDocument"
-						minOccurs="0">
+							 minOccurs="0">
 						<annotation>
 							<documentation>One or the other of the Change Memo and Protocol
 								Highlight documents is required. You do not have to submit both
@@ -1232,7 +1295,7 @@
 
 
 	<complexType name="BaseTrialInformation" abstract="true"
-		block="restriction" final="restriction">
+				 block="restriction" final="restriction">
 		<annotation>
 			<documentation>Trial information common to Registration and Amendment
 				requests.
@@ -1297,7 +1360,7 @@
 			<element name="accrualDiseaseTerminology" type="tns:AccrualDiseaseTerminology" />
 			<element name="primaryPurpose" type="tns:PrimaryPurpose" />
 			<element name="primaryPurposeOtherDescription" type="tns:OtherDescription"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If Trial Primary Purpose is 'Other', please provide
 						an additional description of the trial's purpose using this
@@ -1327,7 +1390,7 @@
 				</annotation>
 			</element>
 			<element name="responsibleParty" type="tns:ResponsibleParty"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>Responsible Party should not be specified if
 						clinicalTrialsDotGovXmlRequired is false.
@@ -1335,11 +1398,11 @@
 				</annotation>
 			</element>
 			<element name="summary4FundingSponsor" type="tns:Organization"
-				maxOccurs="unbounded" />
+					 maxOccurs="unbounded" />
 			<element name="programCode" type="string" minOccurs="0" />
 			<element name="fundedByNciGrant" type="boolean" />
 			<element name="grant" type="tns:Grant" minOccurs="0"
-				maxOccurs="unbounded" />
+					 maxOccurs="unbounded" />
 			<element name="trialStatus" type="tns:TrialStatusCode" />
 			<element name="whyStopped" minOccurs="0">
 				<annotation>
@@ -1363,7 +1426,7 @@
 				</annotation>
 			</element>
 			<element name="primaryCompletionDate" type="tns:TrialDateType"
-				nillable="true">
+					 nillable="true">
 				<annotation>
 					<appinfo>
 						<jaxb:property generateElementProperty="true" />
@@ -1375,7 +1438,7 @@
 				</annotation>
 			</element>
 			<element name="completionDate" type="tns:TrialDateType"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If specified, its type can be either Anticipated or
 						Actual.
@@ -1383,11 +1446,11 @@
 				</annotation>
 			</element>
 			<element name="ind" type="tns:IND_IDE" minOccurs="0"
-				maxOccurs="unbounded" />
+					 maxOccurs="unbounded" />
 			<element name="ide" type="tns:IND_IDE" minOccurs="0"
-				maxOccurs="unbounded" />
+					 maxOccurs="unbounded" />
 			<element name="regulatoryInformation" type="tns:RegulatoryInformation"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>Regulatory Information is required if
 						clinicalTrialsDotGovXmlRequired is true and should not be
@@ -1411,7 +1474,7 @@
 				</annotation>
 			</element>
 			<element name="participatingSitesDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>This document includes site recruitment status and
 						date, target accrual, and site principal investigators.
@@ -1419,7 +1482,7 @@
 				</annotation>
 			</element>
 			<element name="informedConsentDocument" type="tns:TrialDocument"
-				minOccurs="0">
+					 minOccurs="0">
 				<annotation>
 					<documentation>If the Protocol document does not include the
 						Informed Consent and/or participating sites, upload the Informed
@@ -1428,7 +1491,7 @@
 				</annotation>
 			</element>
 			<element name="otherDocument" type="tns:TrialDocument"
-				minOccurs="0" maxOccurs="unbounded">
+					 minOccurs="0" maxOccurs="unbounded">
 				<annotation>
 					<documentation>Any other trial-related document.
 					</documentation>
@@ -1454,7 +1517,7 @@
 	</complexType>
 
 	<complexType name="ParticipatingSiteUpdate" final="#all"
-		block="#all">
+				 block="#all">
 		<annotation>
 			<documentation>Represents an update to a participating site. Since an
 				update to a site cannot change the organization, this type excludes
@@ -1514,7 +1577,7 @@
 				</annotation>
 			</element>
 			<element name="targetAccrualNumber" type="nonNegativeInteger"
-				minOccurs="0" />
+					 minOccurs="0" />
 			<element name="investigator" maxOccurs="unbounded" minOccurs="1">
 				<complexType>
 					<sequence>
