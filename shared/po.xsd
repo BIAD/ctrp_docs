@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="gov.nih.nci.po.webservices.types.trimmed"
-	xmlns:tns="gov.nih.nci.po.webservices.types.trimmed" elementFormDefault="qualified"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
-	xmlns:annox="http://annox.dev.java.net" xmlns:ja="http://annox.dev.java.net/org.codehaus.jackson.annotate"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
+		xmlns:tns="gov.nih.nci.po.webservices.types.trimmed" elementFormDefault="qualified"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+		xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+		xmlns:annox="http://annox.dev.java.net" xmlns:ja="http://annox.dev.java.net/org.codehaus.jackson.annotate"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
                         http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
 
 	<annotation>
@@ -168,7 +168,7 @@
 					</element>
 					<element name="address" type="tns:Address" />
 					<element name="contact" type="tns:Contact" maxOccurs="unbounded"
-						minOccurs="0" />
+							 minOccurs="0" />
 				</sequence>
 			</extension>
 		</complexContent>
@@ -429,8 +429,8 @@
 			<enumeration value="ZWE" />
 		</restriction>
 	</simpleType>
-	
+
 	<element name="person" type="tns:Person"/>
-    <element name="organization" type="tns:Organization"/>   
+	<element name="organization" type="tns:Organization"/>
 
 </schema>

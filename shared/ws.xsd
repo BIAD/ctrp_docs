@@ -1114,6 +1114,14 @@
 					</restriction>
 				</simpleType>
 			</element>
+			<element name="ccrIdentifier" type="string" minOccurs="0">
+				<annotation>
+					<documentation>
+						If trial is originated from ccr it contains CCRID. It is an optional Value
+						and has value only if the rest service is originated by ccr job.
+					</documentation>
+				</annotation>
+			</element>
 			<element name="accrualDiseaseTerminology" type="tns:AccrualDiseaseTerminology"
 					 minOccurs="0">
 				<annotation>
@@ -1354,6 +1362,15 @@
 				<annotation>
 					<documentation>If trial phase is not applicable, please indicate
 						whether or not this is a pilot trial.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="ccrIdentifier" type="string" minOccurs="0">
+				<annotation>
+					<documentation>
+						If trial is originated from ccr it contains CCRID.
+						It is an optional field and has value only if the rest
+						service is originated by CCR job
 					</documentation>
 				</annotation>
 			</element>
@@ -1601,30 +1618,42 @@
 					</sequence>
 				</complexType>
 			</element>
-			<element name="primaryContact" minOccurs="0">
+			<choice minOccurs="0">
 				<annotation>
 					<documentation>
-						This element allows you to specify a primary contact
-						for the site that is different from one of the site's
-						investigators.
+						choose either primary contact or Generic contact for a participating site
 					</documentation>
 				</annotation>
-				<complexType>
-					<sequence>
-						<element name="person" type="tns:Person">
-							<annotation>
-								<documentation>
-									Use this element to specify a person that is the
-									site's primary contact. This can still be one of the
-									investigators or
-									a completely different person.
-								</documentation>
-							</annotation>
-						</element>
-						<element name="contactDetails" type="tns:EmailOrPhone" />
-					</sequence>
-				</complexType>
-			</element>
+				<element name="primaryContact">
+					<annotation>
+						<documentation>
+							This element allows you to specify a primary contact
+							for the site that is different from one of the site's
+							investigators.
+						</documentation>
+					</annotation>
+					<complexType>
+						<sequence>
+							<element name="person" type="tns:Person" />
+							<element name="contactDetails" type="tns:EmailOrPhone" />
+						</sequence>
+					</complexType>
+				</element>
+				<element name="genericContact">
+					<annotation>
+						<documentation>
+							This element allows you to specify a generic contact
+							for the site
+						</documentation>
+					</annotation>
+					<complexType>
+						<sequence>
+							<element name="title" type="string"/>
+							<element name="contactDetails" type="tns:EmailOrPhone" />
+						</sequence>
+					</complexType>
+				</element>
+			</choice>
 		</sequence>
 	</complexType>
 
