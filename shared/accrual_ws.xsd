@@ -163,7 +163,7 @@
 			<element name="disease" type="tns:DiseaseCode" minOccurs="0">
 				<annotation>
 					<documentation><![CDATA[This element should contain a valid disease code using the coding system specified in the <codeSystem> element. 
-                            When the disease <codeSystem> = "ICD-O-3", then either the <disease> or the <siteDisease> is mandatory.
+                            When the disease <codeSystem> = "ICD-O-3", then both the <disease> and the <siteDisease> are mandatory.
 					]]></documentation>
 				</annotation>
 			</element>
