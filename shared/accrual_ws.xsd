@@ -171,7 +171,7 @@
 				<annotation>
 					<documentation><![CDATA[This element is only applicable when the disease <codeSystem> = "ICD-O-3".  
 					It should contains a valid ICD-O-3 body site code. Example: use the code "C34.1" if the disease's body site is "Upper lobe, lung".
-When the disease <codeSystem> = "ICD-O-3", then either the <disease> or the <siteDisease> is mandatory.					
+When the disease <codeSystem> = "ICD-O-3", then both the <disease> and the <siteDisease> are mandatory.					
 					]]></documentation>
 				</annotation>
 			</element>
