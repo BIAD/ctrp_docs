@@ -40,6 +40,7 @@
 			<enumeration value="Male" />
 			<enumeration value="Female" />
 			<enumeration value="Unspecified" />
+			<enumeration value="Undifferentiated" />
 			<enumeration value="Unknown" />
 		</restriction>
 	</simpleType>
