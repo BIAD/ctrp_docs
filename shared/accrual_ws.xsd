@@ -3,7 +3,7 @@
 	xmlns:tns="gov.nih.nci.accrual.webservices.types" elementFormDefault="qualified"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd	                   
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd
                         http://www.w3.org/2001/XMLSchema http://www.w3.org/2001/XMLSchema.xsd">
 
 	<annotation>
@@ -26,10 +26,6 @@
 			</sequence>
 		</complexType>
 	</element>
-	
-	
-   
-	
 
 	<simpleType name="Gender">
 		<annotation>
@@ -80,36 +76,20 @@
 			</documentation>
 		</annotation>
 		<restriction base="string">
-
 			<enumeration value="PRIVATE" />
-
 			<enumeration value="MEDICARE" />
-
 			<enumeration value="MEDICARE_AND_PRIVATE" />
-
 			<enumeration value="MEDICAID" />
-
 			<enumeration value="MEDICAID_AND_MEDICARE" />
-
 			<enumeration value="MILITARY_OR_VETERANS" />
-
 			<enumeration value="MILITARY" />
-
 			<enumeration value="VETERANS" />
-
 			<enumeration value="SELF" />
-
 			<enumeration value="NO_MEANS_OF_PAYMENT" />
-
 			<enumeration value="MANAGED_CARE" />
-
 			<enumeration value="STATE_SUPPLEMENTAL" />
-
 			<enumeration value="OTHER" />
-
 			<enumeration value="UNKNOWN" />
-
-
 		</restriction>
 	</simpleType>
 
@@ -145,35 +125,56 @@
 					</restriction>
 				</simpleType>
 			</element>
-			<element name="birthDate" type="date" />
-			<element name="gender" type="tns:Gender" />
-			<element name="race" type="tns:Race" maxOccurs="7" />
-			<element name="ethnicity" type="tns:Ethnicity" />
-			<element name="country" type="tns:CountryISO-3166-1-alpha-3-Code" />
+			<element name="birthDate" type="date" minOccurs="0">
+				<annotation>
+					<documentation>Birth Date is required for Subject accrual but is optional for Partial Subject accrual</documentation>
+				</annotation>
+			</element>
+			<element name="gender" type="tns:Gender" minOccurs="0">
+				<annotation>
+					<documentation>Gender is required for Subject accrual but is optional for Partial Subject accrual</documentation>
+				</annotation>
+			</element>
+			<element name="race" type="tns:Race" minOccurs="0" maxOccurs="7">
+				<annotation>
+					<documentation>Race is required for Subject accrual but is optional for Partial Subject accrual</documentation>
+				</annotation>
+			</element>
+			<element name="ethnicity" type="tns:Ethnicity" minOccurs="0">
+				<annotation>
+					<documentation>Ethnicity is required for Subject accrual but is optional for Partial Subject accrual</documentation>
+				</annotation>
+			</element>
+			<element name="country" type="tns:CountryISO-3166-1-alpha-3-Code" minOccurs="0" />
 			<element name="zipCode" minOccurs="0">
+				<annotation>
+					<documentation>Zip code is required for US, US territories and outlying islands that use the US Postal Codes.
+                         For countries that do not use the US Postal Codes, zip code is invalid. For Partial Subject accrual, zip code is optional.
+					</documentation>
+				</annotation>
 				<simpleType>
 					<restriction base="string">
 						<minLength value="1" />
-						<maxLength value="16" />
+						<maxLength value="10" />
 					</restriction>
 				</simpleType>
 			</element>
-			<element name="registrationDate" type="date" />
-			<element name="methodOfPayment" type="tns:MethodOfPayment"
-				minOccurs="0" />
+			<element name="registrationDate" type="date"/>
+			<element name="methodOfPayment" type="tns:MethodOfPayment" minOccurs="0" />
 			<element name="disease" type="tns:DiseaseCode" minOccurs="0">
 				<annotation>
-					<documentation><![CDATA[This element should contain a valid disease code using the coding system specified in the <codeSystem> element. 
-                            When the disease <codeSystem> = "ICD-O-3", then both the <disease> and the <siteDisease> are mandatory.
+					<documentation><![CDATA[This element should contain a valid disease code using the coding system specified in the <codeSystem> element.
+                            When the disease <codeSystem> = "ICD-O-3", then both the <disease> and the <siteDisease> are mandatory for Subject level accrual.
+                            For Partial Subject level accrual, both <disease> and <siteDisease> must be empty or both filled in.
 					]]></documentation>
 				</annotation>
 			</element>
 			<element name="siteDisease" type="tns:DiseaseCode" minOccurs="0">
 				<annotation>
-					<documentation><![CDATA[This element is only applicable when the disease <codeSystem> = "ICD-O-3".  
+					<documentation><![CDATA[This element is only applicable when the disease <codeSystem> = "ICD-O-3".
 					It should contains a valid ICD-O-3 body site code. Example: use the code "C34.1" if the disease's body site is "Upper lobe, lung".
-When the disease <codeSystem> = "ICD-O-3", then both the <disease> and the <siteDisease> are mandatory.					
-					]]></documentation>
+                    When the disease <codeSystem> = "ICD-O-3", then both the <disease> and the <siteDisease> are mandatory for Subject level accrual.
+                    For Partial Subject level accrual, both <disease> and <siteDisease> must be empty or both filled in.					]]></documentation>
 				</annotation>
 			</element>
 		</sequence>
@@ -434,9 +435,9 @@ When the disease <codeSystem> = "ICD-O-3", then both the <disease> and the <site
 			<enumeration value="ZWE" />
 		</restriction>
 	</simpleType>
-	
-	
-    
+
+
+
  <element name="batchFile" >
      <complexType >
        <annotation>
