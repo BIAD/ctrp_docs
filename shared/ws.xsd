@@ -589,6 +589,8 @@
 			<enumeration value="NIGMS" />
 			<!-- National Institute of Mental Health. -->
 			<enumeration value="NIMH" />
+			<!-- National Institute on Minority Health and Health Disparities. -->
+			<enumeration value="NIMHD" />
 			<!-- National Institute of Neurological Disorders and Stroke. -->
 			<enumeration value="NINDS" />
 			<!-- National Institute of Nursing Research. -->
@@ -602,10 +604,12 @@
 			<!-- John E. Fogarty International Center for Advanced Study in the Health 
 				Sciences. -->
 			<enumeration value="FIC" />
+			<!-- National Center for Advancing Translational Sciences. -->
+			<enumeration value="NCATS" />
 			<!-- National Center for Complementary and Alternative Medicine. -->
 			<enumeration value="NCCAM" />
-			<!-- National Center on Minority Health and Health Disparities. -->
-			<enumeration value="NCMHD" />
+			<!-- National Center for Complementary and Integrative Health. -->
+			<enumeration value="NCCIH" />
 			<!-- National Center for Research Resources (NCRR). -->
 			<enumeration value="NCRR" />
 			<!-- NIH Clinical Center. -->
@@ -648,9 +652,8 @@
 			<enumeration value="DTP" />
 			<!-- OD-Office of the Director, NCI, NIH. -->
 			<enumeration value="OD" />
-			<!-- OSB/SPOREs -Organ Systems Branch (OSB) /Specialized Programs of Research 
-				Excellence (SPOREs). -->
-			<enumeration value="OSB/SPOREs" />
+			<!-- SPORE-Specialized Programs of Research Excellence. -->
+			<enumeration value="SPORE" />
 			<!-- TRP-Translational Research Program. -->
 			<enumeration value="TRP" />
 			<!-- RRP-Radiation Research Program. -->
