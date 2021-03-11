@@ -1106,6 +1106,11 @@
 					</documentation>
 				</annotation>
 			</element>
+			<element name="ctepIdentifier" type="string" minOccurs="0">
+				<annotation>
+					<documentation></documentation>
+				</annotation>
+			</element>
 			<element name="otherTrialID" minOccurs="0" maxOccurs="unbounded">
 				<annotation>
 					<documentation>Enter an additional trial identifier such as a
@@ -1262,7 +1267,7 @@
 			<extension base="tns:BaseTrialInformation">
 				<sequence>
 					<element name="category" type="tns:TrialCategory" />
-					<element name="trialOwner" minOccurs="0" maxOccurs="unbounded">
+					<element name="trialOwner" minOccurs="0" maxOccurs="unbounded">	
 						<annotation>
 							<documentation>
 								Identifies an owner of this trial by an email
@@ -1302,7 +1307,6 @@
 						</simpleType>
 					</element>
 					<element name="amendmentDate" type="date" />
-					<element name="ctepIdentifier" type="string" minOccurs="0" />
 					<element name="changeMemoDocument" type="tns:TrialDocument"
 						minOccurs="0">
 						<annotation>
@@ -1354,6 +1358,7 @@
 			</element>
 			<element ref="tns:clinicalTrialsDotGovTrialID" minOccurs="0" />
 			<element name="dcpIdentifier" type="string" minOccurs="0" />
+			<element name="ctepIdentifier" type="string" minOccurs="0" />
 			<element name="otherTrialID" minOccurs="0" maxOccurs="unbounded">
 				<annotation>
 					<documentation>Enter an additional trial identifier such as a
