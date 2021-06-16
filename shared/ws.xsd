@@ -650,8 +650,12 @@
 			<enumeration value="DESP" />
 			<!-- DTP-Developmental Therapeutics Program. -->
 			<enumeration value="DTP" />
+			<!-- OCCAM-Office of Cancer Complementary and Alternative Medicine. -->
+			<enumeration value="OCCAM" />
 			<!-- OD-Office of the Director, NCI, NIH. -->
 			<enumeration value="OD" />
+			<!-- OHAM-Office of HIV and AIDS Malignancy. -->
+			<enumeration value="OHAM" />
 			<!-- SPORE-Specialized Programs of Research Excellence. -->
 			<enumeration value="SPORE" />
 			<!-- TRP-Translational Research Program. -->
